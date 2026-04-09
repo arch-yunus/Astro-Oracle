@@ -34,9 +34,38 @@ class RAGEngine:
             embedding_function=self.embeddings
         )
 
-    def search(self, query: str, k: int = 4) -> List[Document]:
-        """Vektör deposunda ilgili belgeleri arar."""
-        return self.vectorstore.similarity_search(query, k=k)
+    def search(
+        self, 
+        query: str, 
+        k: int = 5, 
+        fetch_k: int = 20, 
+        lambda_mult: float = 0.5,
+        filter: Optional[Dict[str, Any]] = None
+    ) -> List[Document]:
+        """
+        Gelişmiş RAG Araması: Benzerlik yerine MMR (Max Marginal Relevance) kullanarak
+        sonuç çeşitliliğini artırır ve meta veri filtrelemeyi destekler.
+        """
+        # MMR Arama
+        docs = self.vectorstore.max_marginal_relevance_search(
+            query,
+            k=k,
+            fetch_k=fetch_k,
+            lambda_mult=lambda_mult,
+            filter=filter
+        )
+        return docs
+
+    def get_citations(self, docs: List[Document]) -> List[Dict[str, Any]]:
+        """Arama sonuçlarından kaynak bilgilerini ayıklar."""
+        citations = []
+        for doc in docs:
+            citations.append({
+                "source": doc.metadata.get("source", "Bilinmeyen Kaynak"),
+                "page": doc.metadata.get("page", 0),
+                "preview": doc.page_content[:150] + "..."
+            })
+        return citations
 
     def get_llm(self, temperature: float = 0.7):
         """Yapılandırılmış LLM örneğini getirir."""

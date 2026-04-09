@@ -1,71 +1,50 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import Dict, Any, Optional
-from app.rag_engine import rag_engine
+from typing import Dict, Any, List
 from app.core.config import settings
+from app.models.schemas import NatalRequest, InterpretationResponse, HealthResponse
+from app.chains.natal_chain import NatalChain
 
 app = FastAPI(
     title=settings.APP_NAME,
-    description="Astro-Oracle: LLM ve RAG kullanarak çalışan otonom astroloji yorumlama motoru.",
-    version="0.1.0"
+    description="Astro-Oracle 2.0: Çok katmanlı RAG ve modüler akıl yürütme zincirleri ile güçlendirilmiş otonom gökyüzü analiz motoru.",
+    version="0.2.0"
 )
 
-class NatalChartRequest(BaseModel):
-    user_id: str
-    focus_area: str = "general"
-    chart_data: Dict[str, Any]
+# Initialize Chains
+natal_chain = NatalChain()
 
 @app.get("/")
 async def root():
-    return {"message": f"{settings.APP_NAME}'a Hoş Geldiniz", "status": "online"}
+    return {"message": f"{settings.APP_NAME} 2.0: Celestial Intelligence Online", "status": "online"}
 
-@app.post("/api/v1/interpret/natal")
-async def interpret_natal(request: NatalChartRequest):
+@app.get("/api/v1/health", response_model=HealthResponse)
+async def health():
+    return HealthResponse(
+        status="healthy",
+        version="0.2.0",
+        engine="Astro-Oracle-Core"
+    )
+
+@app.post("/api/v1/interpret/natal", response_model=InterpretationResponse)
+async def interpret_natal(request: NatalRequest):
     """
-    RAG ve LLM kullanarak doğum haritasını yorumlar.
+    Doğum haritasını modüler akıl yürütme zinciri kullanarak yorumlar.
     """
     try:
-        # 1. Harita verilerine dayalı bağlamsal arama sorgusu oluşturma
-        # Örnek: "Güneş Koç'ta 10. evde, Ay Oğlak'ta 4. evde"
-        query_parts = []
-        for planet, info in request.chart_data.items():
-            sign = info.get("sign", "")
-            house = info.get("house", "")
-            query_parts.append(f"{planet} {sign}'ta {house}. evde")
-        
-        search_query = ", ".join(query_parts) + f". Odak alanı: {request.focus_area}"
-        
-        # 2. Vektör deposundan ilgili belgeleri geri getirme
-        docs = rag_engine.search(search_query)
-        context = "\n".join([doc.page_content for doc in docs])
-        
-        # 3. LLM yorumunu alama
-        llm = rag_engine.get_llm()
-        
-        prompt = f"""
-        Sistem: Sen Astro-Oracle adında seçkin bir gökyüzü yorumcususun. 
-        Kullanıcının doğum haritasını yorumlamak için aşağıdaki tarihi ve teknik bağlamı kullan.
-        Şiirsel, analitik ve uygun yerlerde derinlemesine teknik ol.
-        
-        Bağlam:
-        {context}
-        
-        Aşağıdaki harita verilerini yorumla:
-        {request.chart_data}
-        
-        Odak Alanı: {request.focus_area}
-        """
-        
-        # Basit bir çağrı kullanın
-        response = llm.invoke(prompt)
-        
-        return {
-            "interpretation": response.content,
-            "metadata": {
-                "sources_used": len(docs),
-                "model": "yapılandırılmış-llm"
-            }
-        }
+        response = await natal_chain.run(request.model_dump())
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/v1/query")
+async def generic_query(query: str, k: int = 5):
+    """
+    Vektör deposu üzerinde doğrudan arama yapar (Hata ayıklama ve ham veri erişimi için).
+    """
+    from app.rag_engine import rag_engine
+    try:
+        docs = rag_engine.search(query, k=k)
+        return {"query": query, "results": [doc.page_content for doc in docs]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
