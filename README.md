@@ -1,58 +1,58 @@
-# 🪐 Astro-Oracle: Autonomous Celestial Interpretation Engine
+# 🪐 Astro-Oracle: Otonom Gökyüzü Yorumlama Motoru
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![Lisans: MIT](https://img.shields.io/badge/Lisans-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Sürümü](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688.svg)](https://fastapi.tiangolo.com/)
-[![LangChain](https://img.shields.io/badge/LangChain-Enabled-green.svg)](https://python.langchain.com/)
-[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_Store-ff69b4.svg)](https://www.trychroma.com/)
+[![LangChain](https://img.shields.io/badge/LangChain-Aktif-green.svg)](https://python.langchain.com/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vektör_Veritabanı-ff69b4.svg)](https://www.trychroma.com/)
 
-**Astro-Oracle** is a production-grade, autonomous celestial interpretation engine leveraging **Retrieval-Augmented Generation (RAG)** and advanced **Large Language Models (LLMs)**. Unlike static astrology bots, Astro-Oracle performs dynamic, context-aware synthesis of ancient astronomical texts, historical astrological manuscripts, and diverse mythological frameworks.
+**Astro-Oracle**, **Geri Getirme Artırımlı Üretim (RAG)** ve gelişmiş **Büyük Dil Modellerini (LLM)** kullanan kurumsal düzeyde otonom bir gökyüzü yorumlama motorudur. Statik astroloji botlarının aksine Astro-Oracle; antik gök bilimi metinlerini, tarihi el yazmalarını ve çeşitli mitolojik çerçeveleri dinamik ve bağlama duyarlı bir şekilde sentezler.
 
 ---
 
-## 🏛️ System Architecture
+## 🏛️ Sistem Mimarisi
 
-Astro-Oracle utilizes a multi-layered RAG pipeline to ensure high-fidelity interpretations grounded in authoritative sources.
+Astro-Oracle, yetkili kaynaklara dayanan yüksek doğruluklu yorumlar sağlamak için çok katmanlı bir RAG boru hattı kullanır.
 
 ```mermaid
 graph TD
-    A[User Chart Data] --> B[RAG Query Generator]
-    B --> C{Context Retriever}
-    C -->|Semantic Search| D[(ChromaDB Vector Store)]
-    D --> E[Knowledge Context]
-    E --> F[Prompt Engineering Layer]
-    F --> G[LLM Reasoning Engine]
-    G --> H[Final Interpretation]
+    A[Kullanıcı Harita Verisi] --> B[RAG Sorgu Oluşturucu]
+    B --> C{Bağlam Geri Getirici}
+    C -->|Semantik Arama| D[(ChromaDB Vektör Havuzu)]
+    D --> E[Bilgi Bağlamı]
+    E --> F[Prompt Mühendisliği Katmanı]
+    F --> G[LLM Akıl Yürütme Motoru]
+    G --> H[Final Yorumlama]
     
-    subgraph "Knowledge Base (Ingestion)"
-    I[Antique Texts] --> J[Chunking & Embedding]
-    K[Astrology Manuals] --> J
-    L[Mythological Records] --> J
+    subgraph "Bilgi Bankası (Veri İşleme)"
+    I[Antik Metinler] --> J[Parçalama ve Embedding]
+    K[Astroloji El Kitapları] --> J
+    L[Mitolojik Kayıtlar] --> J
     J --> D
     end
 ```
 
-### Core Components
-- **`app/main.py`**: FastAPI-based REST gateway for interpretation requests.
-- **`app/rag_engine.py`**: Integration layer for LangChain, ChromaDB, and LLM providers.
-- **`app/core/config.py`**: Unified configuration management via `pydantic-settings`.
-- **`scripts/ingest_data.py`**: Specialized pipeline for recursive document indexing and vectorization.
+### Temel Bileşenler
+- **`app/main.py`**: Yorumlama istekleri için FastAPI tabanlı REST geçidi.
+- **`app/rag_engine.py`**: LangChain, ChromaDB ve LLM sağlayıcıları için entegrasyon katmanı.
+- **`app/core/config.py`**: `pydantic-settings` üzerinden merkezi yapılandırma yönetimi.
+- **`scripts/ingest_data.py`**: Özyinelemeli doküman dizinleme ve vektörleştirme için özelleşmiş hat.
 
 ---
 
-## 🔬 Key Features
+## 🔬 Temel Özellikler
 
-- **Semantic Multi-Source Synthesis**: Dynamically retrieves context from Western, Vedic, Hellenistic, and Ancient Turkic (Tengrism) astronomical perspectives.
-- **Agnostic LLM Integration**: Pre-configured support for **OpenAI (GPT-4/Turbo)** and **Google (Gemini Pro)** with extensible local model (Llama 3/Mistral) compatibility.
-- **High-Density Prompt Engineering**: Context-enriched prompts designed for analytical, poetic, and technically accurate celestial readings.
-- **Scalable Document Pipeline**: Automatic processing of complex PDF and Text sources into a high-performance vector database.
+- **Semantik Çok Kaynaklı Sentez**: Batı, Vedik, Helenistik ve Antik Türk (Tengrizm) astronomik perspektiflerinden dinamik bağlam geri getirimi.
+- **Agnostik LLM Entegrasyonu**: **OpenAI (GPT-4/Turbo)** ve **Google (Gemini Pro)** için hazır konfigürasyon; yerel modeller (Llama 3/Mistral) ile uyumluluk.
+- **Yüksek Yoğunluklu Prompt Mühendisliği**: Analitik, şiirsel ve teknik olarak doğru gökyüzü okumaları için tasarlanmış bağlam zengini istemler.
+- **Ölçeklenebilir Doküman Hattı**: Karmaşık PDF ve metin kaynaklarının otomatik olarak yüksek performanslı bir vektör veritabanına dönüştürülmesi.
 
 ---
 
-## 🚀 Rapid Deployment
+## 🚀 Hızlı Kurulum
 
-### 1. Environment Configuration
-Clone the repository and initialize the environment:
+### 1. Ortam Yapılandırması
+Depoyu klonlayın ve sanal ortamı başlatın:
 ```bash
 git clone https://github.com/arch-yunus/astro-oracle.git
 cd astro-oracle
@@ -61,32 +61,32 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Secrets Management
-Configure your `.env` file based on the provided template:
+### 2. Gizli Değişkenlerin Yönetimi
+`.env` dosyanızı şablon üzerinden yapılandırın:
 ```bash
 cp .env.example .env
-# Edit .env with your OPENAI_API_KEY or GOOGLE_API_KEY
+# .env dosyasını OPENAI_API_KEY veya GOOGLE_API_KEY ile güncelleyin
 ```
 
-### 3. Knowledge Ingestion
-Populate `app/data/` with your source documents and run the ingestion script:
+### 3. Bilgi İşleme (Ingestion)
+`app/data/` klasörüne kaynak dokümanlarınızı yerleştirin ve işlemeyi başlatın:
 ```bash
 python scripts/ingest_data.py --source ./app/data
 ```
 
-### 4. Service Execution
-Launch the FastAPI production server:
+### 4. Servisi Başlatma
+FastAPI sunucusunu yayına alın:
 ```bash
 uvicorn app.main:app --reload --port 8000
 ```
 
 ---
 
-## 🛰️ API Usage Example
+## 🛰️ API Kullanım Örneği
 
-**Endpoint:** `POST /api/v1/interpret/natal`
+**Uç Nokta (Endpoint):** `POST /api/v1/interpret/natal`
 
-**Payload:**
+**İstek Gövdesi (Payload):**
 ```json
 {
   "user_id": "nexus-01",
@@ -101,23 +101,17 @@ uvicorn app.main:app --reload --port 8000
 
 ---
 
-## 🗺️ Strategic Roadmap
+## 🗺️ Stratejik Yol Haritası
 
-- [x] **Phase 1**: Core RAG Pipeline and Vector Store Implementation.
-- [x] **Phase 2**: Multi-LLM Support (OpenAI / Gemini).
-- [/] **Phase 3**: Historical Turkic Astronomy Data Integration.
-- [ ] **Phase 4**: Real-time Transit Monitoring Hub (WebSockets).
-- [ ] **Phase 5**: Interactive Chart Synthesis (LLM-driven Chat).
-
----
-
-## 📖 Türkçe Özet (Summary)
-
-**Astro-Oracle**, büyük dil modelleri (LLM) ve RAG mimarisini kullanarak çalışan otonom bir astroloji ve gök bilimi yorumlama motorudur. Statik yorumlamaların aksine, vektör veritabanındaki antik metinleri ve mitolojik referansları analiz ederek doğum haritaları için derinlikli, teknik ve özgün okumalar yapar.
+- [x] **Aşama 1**: Temel RAG Hattı ve Vektör Veritabanı Uygulaması.
+- [x] **Aşama 2**: Çoklu-LLM Desteği (OpenAI / Gemini).
+- [/] **Aşama 3**: Tarihi Türk Astronomi Veri Entegrasyonu.
+- [ ] **Aşama 4**: Gerçek Zamanlı Transit İzleme Merkezi (WebSockets).
+- [ ] **Aşama 5**: İnteraktif Harita Sentezi (LLM Destekli Sohbet).
 
 ---
 
-## 🛡️ License & Copyright
+## 🛡️ Lisans ve Telif Hakkı
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
-Copyright (c) 2026 **Astro-Oracle**.
+**MIT Lisansı** altında dağıtılmaktadır. Daha fazla bilgi için `LICENSE` dosyasına bakınız.
+Telif Hakkı (c) 2026 **Astro-Oracle**.

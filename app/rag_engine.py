@@ -25,8 +25,8 @@ class RAGEngine:
                 model="models/embedding-001"
             )
         else:
-            # Fallback or error
-            raise ValueError("No API Key provided for embeddings (OpenAI or Google required).")
+            # Hata: Embeddingler için API Anahtarı bulunamadı
+            raise ValueError("Embeddingler için API anahtarı sağlanmadı (OpenAI veya Google gereklidir).")
 
     def _get_vectorstore(self):
         return Chroma(
@@ -35,11 +35,11 @@ class RAGEngine:
         )
 
     def search(self, query: str, k: int = 4) -> List[Document]:
-        """Search for relevant documents in the vector store."""
+        """Vektör deposunda ilgili belgeleri arar."""
         return self.vectorstore.similarity_search(query, k=k)
 
     def get_llm(self, temperature: float = 0.7):
-        """Get the configured LLM instance."""
+        """Yapılandırılmış LLM örneğini getirir."""
         if settings.OPENAI_API_KEY:
             return ChatOpenAI(
                 api_key=settings.OPENAI_API_KEY,
@@ -53,6 +53,6 @@ class RAGEngine:
                 temperature=temperature
             )
         else:
-            raise ValueError("No API Key provided for Chat LLM.")
+            raise ValueError("Chat LLM için API anahtarı sağlanmadı.")
 
 rag_engine = RAGEngine()

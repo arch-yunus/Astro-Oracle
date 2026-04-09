@@ -1,30 +1,30 @@
 ---
-name: Bug Report
-about: Create a report to help us improve the Astro-Oracle engine.
-title: "[BUG] "
+name: Hata Raporu
+about: Astro-Oracle motorunu geliştirmemize yardımcı olacak bir rapor oluşturun.
+title: "[HATA] "
 labels: bug, triage
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Hatanın Açıklaması**
+Hatanın ne olduğuna dair açık ve öz bir açıklama.
 
-**Reproduction Steps**
-1. Request sent to `/api/v1/interpret/natal`
-2. With payload: `...`
-3. Error outcome: `...`
+**Yeniden Üretme Adımları**
+1. `/api/v1/interpret/natal` adresine istek gönderildi.
+2. Gönderilen veri: `...`
+3. Hatalı sonuç: `...`
 
-**Expected Behavior**
-A clear and concise description of what you expected to happen.
+**Beklenen Davranış**
+Ne olmasını beklediğinize dair açık ve öz bir açıklama.
 
-**Screenshots/Logs**
-If applicable, add screenshots or terminal logs to help explain your problem.
+**Ekran Görüntüleri/Loglar**
+Varsa, sorunu açıklamanıza yardımcı olacak ekran görüntüleri veya terminal logları ekleyin.
 
-**Environment (please complete the following information):**
-- OS: [e.g. Windows, Ubuntu]
-- Python Version: [e.g. 3.11]
-- LLM Provider: [e.g. OpenAI, Google]
+**Ortam Bilgileri (Lütfen aşağıdaki bilgileri doldurun):**
+- İşletim Sistemi: [örn. Windows, Ubuntu]
+- Python Sürümü: [örn. 3.11]
+- LLM Sağlayıcısı: [örn. OpenAI, Google]
 
-**Additional Context**
-Add any other context about the problem here.
+**Ek Bağlam**
+Sorun hakkında diğer ek bilgileri buraya ekleyin.
