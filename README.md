@@ -1,3 +1,5 @@
+![Astro-Oracle Banner](assets/banner.png)
+
 # 🪐 Astro-Oracle: Otonom Gökyüzü Yorumlama Motoru
 
 [![Lisans: MIT](https://img.shields.io/badge/Lisans-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
