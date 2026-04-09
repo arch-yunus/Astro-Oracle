@@ -1,16 +1,24 @@
 version: '3.8'
 
 services:
-  api:
+  astro-api:
     build: .
+    image: astro-oracle-api:3.0.0
+    container_name: astro_oracle_api
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - ./app:/app/app
+      - ./frontend:/app/frontend
       - ./app/vectorstore:/app/app/vectorstore
+      - ./app/data:/app/app/data
     env_file:
       - .env
+    environment:
+      - PORT=8000
+      - DEBUG=True
     restart: always
 
-volumes:
-  chroma_data:
+networks:
+  default:
+    name: astro_network

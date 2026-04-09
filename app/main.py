@@ -1,38 +1,57 @@
 from fastapi import FastAPI, HTTPException
-from typing import Dict, Any, List
+from fastapi.staticfiles import StaticFiles
 from app.core.config import settings
 from app.models.schemas import NatalRequest, InterpretationResponse, HealthResponse
 from app.chains.natal_chain import NatalChain
+from app.chains.synastry_chain import SynastryChain
+from app.chains.transit_chain import TransitChain
+from app.agents.core import astro_agent
+import os
 
 app = FastAPI(
     title=settings.APP_NAME,
-    description="Astro-Oracle 2.0: Çok katmanlı RAG ve modüler akıl yürütme zincirleri ile güçlendirilmiş otonom gökyüzü analiz motoru.",
-    version="0.2.0"
+    description="Astro-Oracle 3.0: Otonom Ajanlar ve Çok Katmanlı Gök Bilimi Zekası.",
+    version="0.3.0"
 )
 
-# Initialize Chains
+# Mount Frontend
+if os.path.exists("frontend"):
+    app.mount("/gui", StaticFiles(directory="frontend", html=True), name="gui")
+
+# Initialize Chains & Engines
 natal_chain = NatalChain()
+synastry_chain = SynastryChain()
+transit_chain = TransitChain()
 
 @app.get("/")
 async def root():
-    return {"message": f"{settings.APP_NAME} 2.0: Celestial Intelligence Online", "status": "online"}
+    return {"message": f"{settings.APP_NAME} 3.0: Elite Celestial Intelligence Hub Online", "status": "online"}
 
 @app.get("/api/v1/health", response_model=HealthResponse)
 async def health():
     return HealthResponse(
         status="healthy",
-        version="0.2.0",
-        engine="Astro-Oracle-Core"
+        version="0.3.0",
+        engine="Astro-Oracle-Elite-Core"
     )
 
 @app.post("/api/v1/interpret/natal", response_model=InterpretationResponse)
 async def interpret_natal(request: NatalRequest):
-    """
-    Doğum haritasını modüler akıl yürütme zinciri kullanarak yorumlar.
-    """
+    """Doğum haritasını modüler zincir üzerinden analiz eder."""
     try:
         response = await natal_chain.run(request.model_dump())
         return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/v1/agent/query")
+async def agent_query(query: str):
+    """
+    Otonom Astro-Ajan'ı çalıştırır. Karmaşık ve çok adımlı gökyüzü soruları için kullanılır.
+    """
+    try:
+        response = await astro_agent.run(query)
+        return {"agent_response": response, "query": query}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

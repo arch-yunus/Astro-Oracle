@@ -1,94 +1,93 @@
 ![Astro-Oracle Banner](assets/banner.png)
 
-# 🪐 Astro-Oracle: Otonom Gökyüzü Yorumlama Motoru 2.0
+# 🪐 Astro-Oracle 3.0: Elite Celestial Intelligence Hub
 
 [![Lisans: MIT](https://img.shields.io/badge/Lisans-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Sürümü](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688.svg)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-Hazır-blue.svg)](https://www.docker.com/)
-[![CI](https://github.com/arch-yunus/Astro-Oracle/actions/workflows/ci.yml/badge.svg)](https://github.com/arch-yunus/Astro-Oracle/actions/workflows/ci.yml)
+[![Status](https://img.shields.io/badge/Engine-Elite--Tier-gold.svg)]()
 
-**Astro-Oracle 2.0**, çok katmanlı **Geri Getirme Artırımlı Üretim (RAG)** mimarisi ve modüler **Muhakeme Zincirleri (Reasoning Chains)** ile güçlendirilmiş, kurumsal düzeyde otonom bir gökyüzü analiz motorudur.
+**Astro-Oracle 3.0**, kadim gökyüzü bilgeliğini otonom yapay zeka ajanları ve modüler RAG mimarisi ile birleştiren dünyanın en gelişmiş **Gök Bilimi Muhakeme Ekosistemi**'dir. Bu sistem, sadece veri yorumlamakla kalmaz; yıldızların dilini stratejik birer karar destek mekanizmasına dönüştürür.
 
 ---
 
-## 🏗️ Gelişmiş Mimari (V2)
+## 🏛️ Üst Düzey Mimari (V3 Elite)
 
-Astro-Oracle 2.0, karmaşık gökyüzü verilerini işlemek için modüler bir yapı sunar.
+Astro-Oracle 3.0, çok katmanlı bir zeka katmanı sunarak karmaşık celestial (göksel) problemleri otonom olarak çözer.
 
-### Uygulama Bileşenleri
-- **`app/models/`**: Pydantic tabanlı katı veri şemaları ve tip denetimi.
-- **`app/chains/`**: Uzmanlaşmış analiz mantığı (Natal, Transit, Sinastri).
-- **`app/rag_engine.py`**: MMR (Max Marginal Relevance) arama ve kaynak takibi özellikli RAG çekirdeği.
-- **`app/core/constants.py`**: Merkezi istem (Prompt) yönetimi ve astrolojik sabitler.
+### 🤖 Astro-Agent (Otonom Ajan)
+Sistem merkezinde yer alan **Astro-Agent**, LangChain tabanlı otonom bir akıl yürütme motorudur. Kendi araçlarını (Tools) kullanarak çok adımlı analizler yapabilir:
+- **Celestial Search**: Vektör veritabanında semantik derin arama.
+- **Metadata Analytics**: Gezegen konumları ve teknik sembolojilerin analizi.
+
+### 🌌 Elite Uygulama Katmanları
+- **`app/agents/`**: Otonom muhakeme ve araç entegrasyonu.
+- **`app/chains/`**: Uzmanlaşmış analiz hatları (Natal, Sinastri, Transit).
+- **`frontend/`**: Glassmorphic UI/UX tasarımına sahip entegre web arayüzü.
 
 ```mermaid
 graph TD
-    A[İstemci - API] --> B[FastAPI Yönlendirici]
-    B --> C{Analiz Zinciri Seçimi}
-    C -->|Natal| D[NatalChain]
-    C -->|Transit| E[TransitChain]
-    D --> F[RAG Çekirdeği - MMR]
-    F --> G[(Vektör Deposu)]
-    G --> H[Bağlamsal Sentez]
-    H --> I[LLM / Gemini & GPT-4]
-    I --> J[Yapılandırılmış Yanıt + Kaynaklar]
+    User((Kullanıcı)) -->|Web UI| API[FastAPI Gateway]
+    API --> Agent{Astro-Agent}
+    Agent -->|Araç Kullanımı| Search[Celestial Search Tool]
+    Agent -->|Mantıksal Sentez| Chains[Reasoning Chains]
+    Search --> DB[(ChromaDB Knowledge Hub)]
+    Chains --> LLM[Gemini Pro / GPT-4]
+    LLM --> Result[Elite Tier Analysis]
+    Result --> API
 ```
 
 ---
 
-## 🔬 Yenilikler
+## 🔬 Elit Özellikler
 
-- **MMR Arama Çeşitliliği**: Arama sonuçlarında benzerlik yerine çeşitliliğe odaklanarak daha zengin yorumlar üretir.
-- **Otomatik Kaynak Takibi (Citations)**: Üretilen her yorumun hangi tarihi metinlerden beslendiğini metadata olarak raporlar.
-- **Konteyner Desteği**: Docker ve Docker-Compose ile izole, ölçeklenebilir dağıtım.
-- **CI/CD Entegrasyonu**: GitHub Actions ile otomatik linting ve sözdizimi doğrulaması.
+- **💎 Glassmorphic Web Arayüzü**: Gökyüzü estetiğiyle tasarlanmış, derin uzay animasyonlarına sahip interaktif kontrol paneli.
+- **🚀 Otonom Muhakeme**: "Kariyerimdeki engelleri Sun/Saturn karesi ışığında analiz et" gibi kompleks soruları adım adım çözer.
+- **📜 Bilgi Besleme Sentezi**: Antik Türk astronomisi, Helenistik teknikler ve Vedik bilgeliğin hibrit RAG sentezi.
+- **🏗️ Tam Otomasyon**: `Makefile` ve `docker-compose` ile tek komutla kurulum ve yönetim.
 
 ---
 
-## 🐳 Dağıtım ve Çalıştırma
+## 🛠️ Kurulum ve Otomasyon
 
-### Docker ile (Önerilen)
-Proyeyi saniyeler içinde ayağa kaldırın:
+Elite Hub'ı hemen ayağa kaldırmak için:
+
 ```bash
-docker-compose up --build
-```
+# 1. Depoyu kurun ve verileri besleyin
+make install
+make seed
 
-### Manuel Kurulum
-```bash
-git clone https://github.com/arch-yunus/astro-oracle.git
-cd astro-oracle
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+# 2. Docker ile tüm stack'i başlatın (Önerilen)
+make docker-run
+
+# Alternatif: Manuel çalıştırma
+make run
 ```
+*Arayüz adresi:* `http://localhost:8000/gui`
 
 ---
 
-## 🛰️ API Referansı
+## 🛰️ API Ekosistemi
 
-### Natal Analiz
-`POST /api/v1/interpret/natal`
-*Doğum haritasını modüler zincir üzerinden derinlemesine analiz eder.*
-
-### Sistem Sağlık Kontrolü
-`GET /api/v1/health`
-*Motor durumunu ve versiyon bilgisini döner.*
-
-### Ham RAG Sorgusu
-`POST /api/v1/query?query=...`
-*Vektör deposu üzerinde doğrudan semantik arama yapar.*
+| Uç Nokta | Fonksiyon |
+| :--- | :--- |
+| `POST /api/v1/agent/query` | **Otonom Ajan** ile sınırsız muhakeme. |
+| `POST /api/v1/interpret/natal` | Gelişmiş Natal harita sentezi. |
+| `GET /gui` | **Elite Celestial Interface** (Web Arayüzü). |
+| `GET /api/v1/health` | Sistem sağlık ve motor denetimi. |
 
 ---
 
-## 🗺️ Stratejik Yol Haritası
+## 🗺️ Stratejik Yol Haritası (Final)
 
-- [x] **V1**: Temel RAG ve Vektör Veritabanı.
-- [x] **V2**: Modüler Zincirler, Docker Desteği ve Kaynak Takibi.
-- [ ] **V3**: Gerçek Zamanlı Gökyüzü Efemeris Entegrasyonu.
-- [ ] **V4**: Çoklu Dil Desteği Geliştirmeleri ve Dinamik Dashboard.
+- [x] **V1**: RAG Altyapısı.
+- [x] **V2**: Modüler Zincirler ve Docker.
+- [x] **V3**: **Otonom Ajanlar ve Elite Web Arayüzü.** ✨
+- [ ] **V4**: Çok Kanallı Yayın (Discord/Telegram) ve Gerçek Zamanlı Gök Günlüğü.
 
 ---
 
 ## 🛡️ Lisans
 
-**MIT Lisansı** altında dağıtılmaktadır. Copyright (c) 2026 **Astro-Oracle**.
+**MIT Lisansı** altında dağıtılmaktadır. Copyright (c) 2026 **Astro-Oracle Elite Team**.

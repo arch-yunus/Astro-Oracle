@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro-Oracle 3.0 | Elite Celestial Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="nebula"></div>
+    
+    <main class="container">
+        <header class="glass-header">
+            <div class="logo">
+                <span class="icon">🪐</span>
+                <h1>Astro-Oracle <span class="badge">3.0</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Panel</a></li>
+                    <li><a href="#">Analizler</a></li>
+                    <li><a href="#">Arşiv</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="grid-layout">
+            <!-- Left Panel: Chart Input -->
+            <aside class="glass-panel input-panel">
+                <h2>Doğum Bilgileri</h2>
+                <form id="chart-form">
+                    <div class="input-group">
+                        <label>Odak Alanı</label>
+                        <select id="focus-area">
+                            <option value="general">Genel Analiz</option>
+                            <option value="career">Kariyer & Strateji</option>
+                            <option value="relationships">İlişkiler</option>
+                        </select>
+                    </div>
+                    <div class="planet-inputs" id="planet-inputs">
+                        <!-- Dynamic Planet Inputs -->
+                    </div>
+                    <button type="button" id="interpret-btn" class="glow-btn">Analiz Et</button>
+                </form>
+            </aside>
+
+            <!-- Center/Right Panel: Chat & Results -->
+            <div class="main-display">
+                <div class="glass-panel chat-container">
+                    <div class="chat-header">
+                        <h2>Astro-Agent <span class="status pulse"></span></h2>
+                        <p>Otonom Gök Bilimi Zekası</p>
+                    </div>
+                    <div id="chat-messages" class="messages">
+                        <div class="msg bot">Astro-Oracle Elite Hub'a hoş geldiniz. Bugün gökyüzünden ne öğrenmek istersiniz?</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="agent-query" placeholder="Yıldızlara sorunuzu sorun...">
+                        <button id="send-btn">🚀</button>
+                    </div>
+                </div>
+
+                <div class="glass-panel results-panel hidden" id="results-panel">
+                    <h2>Göksel Yorumlama</h2>
+                    <div id="interpretation-text" class="text-content"></div>
+                    <div class="citations-area">
+                        <h3>Kaynaklar</h3>
+                        <ul id="citations-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
